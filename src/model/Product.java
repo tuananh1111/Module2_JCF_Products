@@ -3,12 +3,12 @@ package model;
 public class Product {
     private long id;
     private String name;
-    private double price;
+    private long price;
 
     public Product() {
     }
 
-    public Product(long id, String name, double price) {
+    public Product(long id, String name, long price) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -34,7 +34,7 @@ public class Product {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(long price) {
         this.price = price;
     }
 

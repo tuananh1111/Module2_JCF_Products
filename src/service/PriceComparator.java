@@ -8,10 +8,10 @@ import java.util.Comparator;
 public class PriceComparator implements Comparator<Product> {
 
     @Override
-    public int compare(Product o1, Product o2) {
-        if (o1.getPrice()>o2.getPrice()){
+    public int compare(Product product1, Product product2) {
+        if (product1.getPrice()>product2.getPrice()){
             return 1;
-        }else if (o1.getPrice()==o2.getPrice()){
+        }else if (product1.getPrice()==product2.getPrice()){
             return 0;
         }else return -1;
     }

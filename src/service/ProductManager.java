@@ -6,9 +6,9 @@ import java.util.Iterator;
 import java.util.List;
 
 public class ProductManager implements IManager<Product> {
-    static List<Product> products;
+    static List<Product> products= new ArrayList<>();
     static {
-        products= new ArrayList<>();
+
         products.add(new Product(1,"Shampoo",86000));
         products.add(new Product(2,"Oreo",20000));
         products.add(new Product(3,"Shoes",1586000));
@@ -16,32 +16,23 @@ public class ProductManager implements IManager<Product> {
         products.add(new Product(5,"Whey",1100000));
     }
 
-
     @Override
     public void add(Product object) {
-        boolean samesame= false;
-        for (int i=0;i<products.size();i++){
-            if(object.getId()==products.get(i).getId()){
-                samesame= true;
-            }
-        }
-        if (!samesame){
+        if (!checkID(object.getId())){
             products.add(object);
         }
+    }
+
+    @Override
+    public void update(long id, Product newObject) {
+        if (checkID(id)){
+            products.set((int) id-1,newObject);
+        }else products.add(newObject);
 
     }
 
     @Override
-    public void update(Long id, Product newObject) {
-        for (int i=0; i<products.size();i++){
-            if (id== products.get(i).getId()){
-                products.set(i,newObject);
-            }
-        }
-    }
-
-    @Override
-    public void delete(Long id) {
+    public void delete(long id) {
         for (int i=0; i<products.size();i++){
             if (id == products.get(i).getId()){
                 products.remove(i);
@@ -69,4 +60,23 @@ public class ProductManager implements IManager<Product> {
             }
         }return list;
     }
+
+    @Override
+    public Product findById(long id) {
+        Product idProduct=null;
+        for (int i=0;i<products.size();i++){
+            if (id==products.get(i).getId()){
+                idProduct=products.get(i);
+            }
+        }return idProduct;
+    }
+
+    public boolean checkID(long id){
+        for (Product product: products){
+             if(product.getId()==id){
+                 return true;
+             }
+        }return false;
+    }
+
 }
